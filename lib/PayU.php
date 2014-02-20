@@ -8,6 +8,7 @@ class PayU
     const IRN_URL = 'https://secure.payu.ru/order/irn.php';
     const PAYOUT_LINK_CARD_URL = 'https://secure.payu.ru/order/pwa/service.php/UTF/NewPayoutCard';
     const PAYOUT_URL = 'https://secure.payu.ru/order/prepaid/NewCardPayout';
+    const IOS_URL = 'https://secure.payu.ru/order/ios.php';
 
     /**
      * Идентификатор мерчанта.
@@ -186,6 +187,23 @@ class PayU
         $hash = hash_hmac('md5', $hash, $this->secretKey);
 
         $result = '<EPAYMENT>' . $date . '|' . $hash . '</EPAYMENT>';
+
+        return $result;
+    }
+
+    /**
+     * @param integer $refNo
+     * @return string
+     */
+    function sendIosRequest($refNo)
+    {
+        $data = array(
+            'MERCHANT' => $this->merchantName,
+            'REFNOEXT' => $refNo,
+        );
+        $data['HASH'] = $this->hashLiveUpdateFormData($data);
+
+        $result = $this->sendPostRequest(self::IOS_URL, $data);
 
         return $result;
     }
