@@ -236,16 +236,16 @@ class PayU
             'TESTORDER',
         );
 
-        $hash = '';
+        $hash = strlen($data['MERCHANT']) . $data['MERCHANT'];
+        unset($data['MERCHANT']);
         foreach ($data as $dataKey => $dataValue) {
             if (in_array($dataKey, $ignoredKeys)) {
                 continue;
             }
             $hash .= strlen($dataValue) . $dataValue;
         }
-        $hash = hash_hmac('md5', $hash, $this->secretKey);
 
-        return $hash;
+        return hash_hmac('md5', $hash, $this->secretKey);
     }
 
     /**
