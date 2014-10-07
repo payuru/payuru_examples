@@ -234,6 +234,7 @@ class PayU
             'LU_ENABLE_TOKEN',
             'LU_TOKEN_TYPE',
             'TESTORDER',
+            'LANGUAGE'
         );
 
         $hash = strlen($data['MERCHANT']) . $data['MERCHANT'];
