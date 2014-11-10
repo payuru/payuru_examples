@@ -2,8 +2,8 @@
 
 require_once __DIR__ . '/lib/PayU.php';
 
-$payu = new PayU('merchant_id', 'merchant_name', 'secret_key');
-
+$payu = new PayU('', 'merchant_name', 'secret_key');
+//Первый параметр нужно оставлять пустым, если вы не используете Payout (выплаты на карты)
 $formData = $payu->initLiveUpdateFormData(array(
     // Данные заказа
     'ORDER_REF' => 1,
