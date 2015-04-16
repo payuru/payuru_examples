@@ -19,4 +19,4 @@ payout_link_card_example.php - для регистрации карты, что 
 
 token_payment_example.php - для работы с токенами
 
-Пример для ALU проткола есть к конце документации http://payu-api.ru/pages/viewpage.action?pageId=1376260
+Пример для ALU проткола есть к конце документации http://payu-api.ru/pages/viewpage.action?pageId=4718617

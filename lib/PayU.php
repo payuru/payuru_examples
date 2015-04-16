@@ -103,11 +103,14 @@ class PayU
      */
     function sendIdnRequest(array $data)
     {
-        $data['MERCHANT'] = $this->merchantName;
+	$uns_data = array();
+        $uns_data['MERCHANT'] = $this->merchantName;
 
-        $data['ORDER_HASH'] = $this->hashTokenPayment($data);
+	$uns_data = array_merge($uns_data, $data);
 
-        $result = $this->sendPostRequest(self::IDN_URL, $data);
+        $uns_data['ORDER_HASH'] = $this->hashTokenPayment($uns_data, false);
+
+        $result = $this->sendPostRequest(self::IDN_URL, $uns_data);
 
         return $result;
     }
@@ -120,11 +123,14 @@ class PayU
      */
     function sendIrnRequest(array $data)
     {
-        $data['MERCHANT'] = $this->merchantName;
+	$uns_data = array();
+        $uns_data['MERCHANT'] = $this->merchantName;
 
-        $data['ORDER_HASH'] = $this->hashTokenPayment($data);
+	$uns_data = array_merge($uns_data, $data);
 
-        $result = $this->sendPostRequest(self::IRN_URL, $data);
+        $uns_data['ORDER_HASH'] = $this->hashTokenPayment($uns_data, false);
+
+        $result = $this->sendPostRequest(self::IRN_URL, $uns_data);
 
         return $result;
     }
@@ -255,9 +261,9 @@ class PayU
      * @param array $data
      * @return string
      */
-    protected function hashTokenPayment(array $data)
+    protected function hashTokenPayment(array $data, $sort = true)
     {
-        ksort($data);
+        if ($sort) ksort($data);
 
         $hash = '';
         foreach ($data as $dataValue) {
@@ -296,6 +302,7 @@ class PayU
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         $result = curl_exec($ch);
+	if(curl_exec($ch) === false) echo 'CURL error: ' . curl_error($ch);
         curl_close($ch);
 
         return $result;

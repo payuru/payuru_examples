@@ -2,7 +2,8 @@
 
 require_once __DIR__ . '/lib/PayU.php';
 
-$payu = new PayU('merchant_id', 'merchant_name', 'secret_key');
+// merchant_id - текстовый
+$payu = new PayU('merchant_id', '', 'secret_key');
 
 $result = $payu->createTokenPayment(array(
     // Данные платежа

@@ -2,7 +2,8 @@
 
 require_once __DIR__ . '/lib/PayU.php';
 
-$payu = new PayU('merchant_id', 'merchant_name', 'secret_key');
+// Первый - текстовое имя ТСН 
+$payu = new PayU('merchant_id', '', 'secret_key');
 
 $result = $payu->sendPayoutRequest(array(
     // данные Payout запроса

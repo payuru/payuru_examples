@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/lib/PayU.php';
+require_once dirname(__FILE__) . '/lib/PayU.php';
 
 $payu = new PayU('', 'merchant_name', 'secret_key');
 //Первый параметр нужно оставлять пустым, если вы не используете Payout (выплаты на карты)
