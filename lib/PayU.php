@@ -222,6 +222,18 @@ class PayU
      */
     protected function hashLiveUpdateFormData(array $data)
     {
+        $hash = strlen($data['MERCHANT']) . $data['MERCHANT'];
+        unset($data['MERCHANT']);
+	
+	$hash .= $this->hasher($data);
+
+        return hash_hmac('md5', $hash, $this->secretKey);
+    }
+
+    /**
+     * Рекурсивная для массивов
+     */
+    function hasher($data) {
         $ignoredKeys = array(
             'AUTOMODE',
             'BACK_REF',
@@ -243,16 +255,16 @@ class PayU
             'LANGUAGE'
         );
 
-        $hash = strlen($data['MERCHANT']) . $data['MERCHANT'];
-        unset($data['MERCHANT']);
+        $hash = '';
         foreach ($data as $dataKey => $dataValue) {
-            if (in_array($dataKey, $ignoredKeys)) {
-                continue;
-            }
-            $hash .= strlen($dataValue) . $dataValue;
+	    if (is_array($dataValue)) 
+                $hash .= $this->hasher($dataValue);
+	    else {
+                if (!in_array($dataKey, $ignoredKeys, true)) 
+			$hash .= strlen($dataValue) . $dataValue;
+	    }
         }
-
-        return hash_hmac('md5', $hash, $this->secretKey);
+        return $hash;
     }
 
     /**
