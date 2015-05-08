@@ -314,7 +314,7 @@ class PayU
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         $result = curl_exec($ch);
-	if(curl_exec($ch) === false) echo 'CURL error: ' . curl_error($ch);
+	if ($result === false) echo 'CURL error: ' . curl_error($ch);
         curl_close($ch);
 
         return $result;
