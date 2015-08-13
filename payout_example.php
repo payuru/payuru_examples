@@ -26,6 +26,7 @@ $result = $payu->sendPayoutRequest(array(
  * Формат ответа: {CODE: MESSAGE}
  * CODE || MESSAGE
  * 1       Success
+ * 9       PENDING (check status of transaction using API or in cPanel)
  * -1      ERROR
  * -100    Error with sending the Payout to the bank
  * -101    MerchantCode empty
