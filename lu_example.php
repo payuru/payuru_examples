@@ -47,7 +47,6 @@ $formData = $payu->initLiveUpdateFormData(array(
     'ORDER_SHIPPING' => 100,
     'PRICES_CURRENCY' => 'RUB',
     'DISCOUNT' => 10,
-    'TESTORDER' => 'TRUE',
     'AUTOMODE' => 1,
     'ORDER_PRICE_TYPE[]' => $order_ptype,
     // Данные плательщика
@@ -63,6 +62,7 @@ $formData = $payu->initLiveUpdateFormData(array(
     'DELIVERY_PHONE' => '79123456789',
     'DELIVERY_ADDRESS' => 'ул. Шторная, д. 1',
     'DELIVERY_CITY' => 'Москва',
+    'TESTORDER' => 'TRUE',
 ), 'http://example.com/order_done.php', 'PAY_BY_CLICK');
 
 
