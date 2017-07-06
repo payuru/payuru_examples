@@ -251,7 +251,6 @@ class PayU
             'DELIVERY_CITY',
             'LU_ENABLE_TOKEN',
             'LU_TOKEN_TYPE',
-            'TESTORDER',
             'LANGUAGE'
         );
 
